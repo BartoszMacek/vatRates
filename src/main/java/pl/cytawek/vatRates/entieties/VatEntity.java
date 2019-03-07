@@ -1,6 +1,7 @@
 package pl.cytawek.vatRates.entieties;
 
 
+import lombok.Builder;
 import lombok.Data;
 
 
@@ -8,6 +9,7 @@ import javax.persistence.*;
 
 @Data
 @Entity
+@Builder
 @Table (name="vat")
 public class VatEntity {
 

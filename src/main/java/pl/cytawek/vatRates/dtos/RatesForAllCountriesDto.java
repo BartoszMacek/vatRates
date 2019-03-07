@@ -69,4 +69,10 @@ public class RatesForAllCountriesDto {
         this.additionalProperties.put(name, value);
     }
 
+    public RatesForAllCountriesDto(String details, Object version, List<Rate> rates, Map<String, Object> additionalProperties) {
+        this.details = details;
+        this.version = version;
+        this.rates = rates;
+        this.additionalProperties = additionalProperties;
+    }
 }
