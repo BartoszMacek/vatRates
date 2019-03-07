@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<link th:href="@{/Bootstrap/css/bootstrap.css}" rel="stylesheet" type="text/css" }>
+<link th:href="@{/style.css}" rel="stylesheet" type="text/css" media="all">
+<script th:src="@{/Bootstrap/js/bootstrap.js}"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>Vat Table</title>
+</head>
+<body>
+
+<table class="table table-striped">
+    <tr>
+        <th>Country Name</th>
+        <th>Country Code</th>
+        <th>Standard Rates</th>
+        <th>Parking Rates</th>
+        <th>Reduced Rates</th>
+        <th>Reduced I Rates</th>
+        <th>Reduced II Rates</th>
+        <th>Super Reduced Rates</th>
+
+    </tr>
+
+    <tr th:if="countrylist != null" th:each="country : ${countrylist}">
+        <!--<td th:text="${countrylist.size()}"></td>-->
+        <td th:text="${country.getName()}"></td>
+        <td th:text="${country.getCountryCode()}"></td>
+        <td th:text="${country.getPeriods().get(0).getRates().getStandard()}"></td>
+        <td th:text="${country.getPeriods().get(0).getRates().getParking()}"></td>
+        <td th:text="${country.getPeriods().get(0).getRates().getReduced()}"></td>
+        <td th:text="${country.getPeriods().get(0).getRates().getReduced1()}"></td>
+        <td th:text="${country.getPeriods().get(0).getRates().getReduced2()}"></td>
+        <td th:text="${country.getPeriods().get(0).getRates().getSuperReduced()}"></td>
+
+    </tr>
+</table>
+
+
+
+</body>
+</html>

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Vat Table</title>
+</head>
+<body>
+
+<li th:each="vatTable :${countryCode.getRate()}"
+th:text="${vatTable.getAdditionalProperties()}">
+
+</li>
+
+</body>
+</html>
