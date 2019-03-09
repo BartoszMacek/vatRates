@@ -9,37 +9,50 @@ import pl.cytawek.vatRates.entieties.VatEntity;
 import pl.cytawek.vatRates.mappers.VatDtoToVatEntity;
 import pl.cytawek.vatRates.repositories.VatRepositories;
 
+
 @Service
 public class VatService {
 
-    final VatRepositories vatRepositories;
+    private final VatRepositories vatRepositories;
 
     @Autowired
     public VatService(VatRepositories vatRepositories) {
         this.vatRepositories = vatRepositories;
     }
 
-
     public RatesForAllCountriesDto getCurrentVat() {
         RestTemplate restTemplate = getRestTemplate();
-        RatesForAllCountriesDto ratesForAllCountriesDto = restTemplate.getForObject(
-                "https://jsonvat.com/", RatesForAllCountriesDto.class );
-        saveVat( ratesForAllCountriesDto );
-
-        return ratesForAllCountriesDto;
+        RatesForAllCountriesDto vatRatesDto = restTemplate.getForObject(
+                "http://jsonvat.com/", RatesForAllCountriesDto.class );
+        return vatRatesDto;
     }
 
 
-
-    private boolean saveVat(RatesForAllCountriesDto ratesForAllCountriesDto) {
-        VatEntity vatEntity = VatDtoToVatEntity.convert( ratesForAllCountriesDto );
-        return vatRepositories.save( vatEntity ) != null;
+    public RatesForAllCountriesDto saveSingleRecord(String countryCode) {
+        RestTemplate restTemplate = getRestTemplate();
+        RatesForAllCountriesDto vatRatesDto = restTemplate.getForObject(
+                "http://jsonvat.com/", RatesForAllCountriesDto.class );
+        saveVat( vatRatesDto, countryCode );
+        return vatRatesDto;
     }
 
-    
+
+    private boolean saveVat(RatesForAllCountriesDto vatRatesDto, String countryCode) {
+
+        for (int i = 0; i < vatRatesDto.getRates().size(); i++) {
+            VatEntity vatEntity = VatDtoToVatEntity.convert( vatRatesDto, i );
+            if (vatRatesDto.getRates().get( i ).getCountryCode().equals( countryCode ))
+                vatRepositories.save( vatEntity );
+
+        }
+        return false;
+    }
+
+
     @Bean
     public RestTemplate getRestTemplate() {
         return new RestTemplate();
     }
+
 
 }
