@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<link th:href="@{/Bootstrap/css/bootstrap.css}" rel="stylesheet" type="text/css">
+<link th:href="@{/style.css}" rel="stylesheet" type="text/css" media="all">
+<script th:src="@{/Bootstrap/js/bootstrap.js}"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>Database log of Vat Rates</title>
+</head>
+<body>
+
+<table class="table table-striped table-dark">
+    <tr>
+        <th>Country Name</th>
+        <th>Country Code</th>
+        <th>Standard Rates</th>
+        <th>Parking Rates</th>
+        <th>Reduced Rates</th>
+        <th>Reduced I Rates</th>
+        <th>Reduced II Rates</th>
+        <th>Super Reduced Rates</th>
+        <th>Remove from Database</th>
+
+    </tr>
+    <tr th:if="historyLog != null" th:each="log : ${historyLog}">
+        <td th:text="${log.getCountryName()}"></td>
+        <td th:text="${log.getCountryCode()}"></td>
+        <td th:text="${log.getStandard()}"></td>
+        <td th:text="${log.getParking()}"></td>
+        <td th:text="${log.getReduced()}"></td>
+        <td th:text="${log.getReduced1()}"></td>
+        <td th:text="${log.getReduced2()}"></td>
+        <td th:text="${log.getSuperReduced()}"></td>
+        <td>
+            <a th:href="@{/history/delete/(id=${log.getId()})}" class="btn btn-danger">Delete</a>
+        </td>
+    </tr>
+</table>
+
+<div style="text-align: center">
+    <a href="/">
+        <button class="btn btn-default btn-sm align: center" type="button">Home Page</button>
+    </a>
+</div>
+
+
+</body>
+</html>

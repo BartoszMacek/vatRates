@@ -9,6 +9,8 @@ import pl.cytawek.vatRates.entieties.VatEntity;
 import pl.cytawek.vatRates.mappers.VatDtoToVatEntity;
 import pl.cytawek.vatRates.repositories.VatRepositories;
 
+import java.util.List;
+
 
 @Service
 public class VatService {
@@ -36,16 +38,17 @@ public class VatService {
         return vatRatesDto;
     }
 
-
     private boolean saveVat(RatesForAllCountriesDto vatRatesDto, String countryCode) {
-
         for (int i = 0; i < vatRatesDto.getRates().size(); i++) {
             VatEntity vatEntity = VatDtoToVatEntity.convert( vatRatesDto, i );
             if (vatRatesDto.getRates().get( i ).getCountryCode().equals( countryCode ))
                 vatRepositories.save( vatEntity );
-
         }
         return false;
+    }
+
+    public List<VatEntity> getVatEntityLog() {
+        return vatRepositories.findAll();
     }
 
 
@@ -55,4 +58,7 @@ public class VatService {
     }
 
 
+    public void toDelete(int id) {
+        vatRepositories.deleteById( id );
+    }
 }

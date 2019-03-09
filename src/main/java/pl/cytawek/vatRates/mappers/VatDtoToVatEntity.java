@@ -23,8 +23,8 @@ public class VatDtoToVatEntity {
         if (vatDto.getRates().get( i ).getPeriods().get( 0 ).getRates().getParking() != null) {
             vatEntity.setParking( vatDto.getRates().get( i ).getPeriods().get( 0 ).getRates().getParking() );
         } else vatEntity.setParking( 0.0 );
-        if (vatDto.getRates().get( 0 ).getPeriods().get( 0 ).getRates().getSuperReduced() != null) {
-            vatEntity.setSuperReduced( vatDto.getRates().get( 0 ).getPeriods().get( 0 ).getRates().getSuperReduced() );
+        if (vatDto.getRates().get( i ).getPeriods().get( 0 ).getRates().getSuperReduced() != null) {
+            vatEntity.setSuperReduced( vatDto.getRates().get( i ).getPeriods().get( 0 ).getRates().getSuperReduced() );
         } else vatEntity.setSuperReduced( 0.0 );
 
 
