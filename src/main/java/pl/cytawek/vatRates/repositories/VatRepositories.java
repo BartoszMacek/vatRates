@@ -9,6 +9,6 @@ import java.util.Optional;
 @Repository
 public interface VatRepositories extends JpaRepository <VatEntity, Integer> {
 
-    Optional<VatEntity> findByCountryCode(String countryCode);
+    //Optional<VatEntity> findByCountryCode(String countryCode);
 
 }

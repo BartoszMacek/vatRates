@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
-<link th:href="@{/Bootstrap/css/bootstrap.css}" rel="stylesheet" type="text/css" }>
+<link th:href="@{/Bootstrap/css/bootstrap.css}" rel="stylesheet" type="text/css">
 <link th:href="@{/style.css}" rel="stylesheet" type="text/css" media="all">
 <script th:src="@{/Bootstrap/js/bootstrap.js}"></script>
 <head>
@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<table class="table table-striped">
+<table class="table table-striped table-dark">
     <tr>
         <th>Country Name</th>
         <th>Country Code</th>
@@ -19,25 +19,32 @@
         <th>Reduced I Rates</th>
         <th>Reduced II Rates</th>
         <th>Super Reduced Rates</th>
+        <th>Add to Database</th>
 
     </tr>
 
     <tr th:if="countrylist != null" th:each="country : ${countrylist}">
-        <!--<td th:text="${countrylist.size()}"></td>-->
         <td th:text="${country.getName()}"></td>
-        <td th:text="${country.getCountryCode()}"></td>
+        <td th:text="${country.getCode()}"></td>
         <td th:text="${country.getPeriods().get(0).getRates().getStandard()}"></td>
         <td th:text="${country.getPeriods().get(0).getRates().getParking()}"></td>
         <td th:text="${country.getPeriods().get(0).getRates().getReduced()}"></td>
         <td th:text="${country.getPeriods().get(0).getRates().getReduced1()}"></td>
         <td th:text="${country.getPeriods().get(0).getRates().getReduced2()}"></td>
         <td th:text="${country.getPeriods().get(0).getRates().getSuperReduced()}"></td>
-        <!--<td> <a th:href="{@/index/delete/}" class="btn btn-dark">Sent rate to DB</a> </td>-->
-        <!--todo - method to do, with add particular row to database-->
+        <td>
+            <form th:action="@{/add/(countryCode=${country.getCode()})}" method="post"><input type="submit"
+                                                                                              value="Add to database">
+            </form>
+        </td>
 
     </tr>
 </table>
-
+<div style="text-align: center">
+    <a href="/history">
+        <button class="btn btn-default btn-sm" type="button">History</button>
+    </a>
+</div>
 
 
 </body>

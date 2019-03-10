@@ -9,8 +9,7 @@ import javax.persistence.*;
 
 @Data
 @Entity
-@Builder
-@Table (name="vat")
+@Table (name="vatrates")
 public class VatEntity {
 
     private @Id @GeneratedValue int id;
